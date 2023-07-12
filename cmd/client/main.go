@@ -79,7 +79,7 @@ func getAllCommand(ctx context.Context, client api.FleetClient, args []string) b
 
 	cars, err := client.GetAllCars(ctx, &api.Empty{})
 	fmt.Println("Ошибка:", err)
-	if err != nil {
+	if err == nil {
 		for _, car := range cars.GetCars() {
 			fmt.Println(parseCar(car))
 		}
