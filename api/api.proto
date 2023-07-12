@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option go_package = "./api";
+
+package api;
+
+service Fleet {
+  rpc RegisterCar(Car) returns(Empty);
+  rpc GetCar(RP) returns(Car);
+  rpc GetAllCars(Empty) returns(CarList);
+  rpc AddMileage(AddMileageRequest) returns(Empty);
+  rpc DeleteCar(RP) returns(Empty);
+  rpc GetEstimatedCost(RP) returns(EstimatedCostResp);
+}
+
+message RP {
+  string registration_plate = 1;
+}
+
+message AddMileageRequest {
+  string registration_plate = 1;
+  int32 mileage = 2;
+}
+
+message Car {
+  string registration_plate = 1;
+  string model = 2;
+  Purpose purpose = 3;
+  int32 manufacture_year = 5;
+  int32 mileage = 4;
+}
+
+message CarList {
+  repeated Car cars = 1;
+}
+
+message EstimatedCostResp {
+  int64 cost = 1;
+}
+
+enum Purpose {
+  SHARING = 0;
+  TAXI = 1;
+  DELIVERY = 2;
+}
+
+message Empty {}

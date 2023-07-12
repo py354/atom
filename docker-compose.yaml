@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: "atomdb"
+      POSTGRES_USER: "atomuser"
+      POSTGRES_PASSWORD: "atompass"
+    volumes:
+      - ./migrations:/docker-entrypoint-initdb.d
+  server:
+    build: .
+    environment:
+      POSTGRES_DB: "atomdb"
+      POSTGRES_USER: "atomuser"
+      POSTGRES_PASSWORD: "atompass"
+    depends_on:
+    - db
+
+
