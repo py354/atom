@@ -22,7 +22,7 @@ delete <номер>
 add-mileage <номер> <пробег>
 get-cost <номер>
 register <номер> <модель> <назначение> <год выпуска> <пробег>
-модель должна быть SHARING, TAXI или DELIVERY
+назначение должно быть SHARING, TAXI или DELIVERY
 `
 
 func main() {
@@ -94,9 +94,6 @@ func getCar(ctx context.Context, client api.FleetClient, args []string) bool {
 
 	car, err := client.GetCar(ctx, &api.RP{RegistrationPlate: args[1]})
 	fmt.Println("Ошибка:", err)
-	if err != nil {
-
-	}
 	fmt.Println(parseCar(car))
 	return true
 }
@@ -108,9 +105,6 @@ func getCost(ctx context.Context, client api.FleetClient, args []string) bool {
 
 	car, err := client.GetEstimatedCost(ctx, &api.RP{RegistrationPlate: args[1]})
 	fmt.Println("Ошибка:", err)
-	if err != nil {
-
-	}
 	fmt.Println(car.GetCost())
 	return true
 }
